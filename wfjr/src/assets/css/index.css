@@ -1,0 +1,456 @@
+@charset "utf-8";
+/*------------------------------------------------------------
+	トープページ
+------------------------------------------------------------*/
+textarea {
+	resize: none;
+}
+
+#gNavi .on a {
+	color: #fff;
+	background-color: #076CE0;
+	border-radius: 5px;
+}
+
+.mainVisual {
+	margin-bottom: 80px;
+}
+
+.foopage {
+	margin-top: 10px;
+	text-align: center;
+}
+
+.foopage a {
+	margin: 0 5px;
+	display: inline-block;
+	background: url(../img/slideshow/icon02.gif) no-repeat;
+	width: 11px;
+	height: 10px;
+}
+
+.foopage a.selected {
+	background: url(../img/slideshow/icon01.gif) no-repeat;
+}
+
+.foopage a span {
+	display: none;
+}
+
+.mainVisual .sliderBox {
+	position: relative;
+}
+
+.mainVisual .sliderBox .arrow li {
+	position: absolute;
+	top: 50%;
+	margin-top: -22px;
+	cursor: pointer;
+}
+
+.mainVisual .sliderBox .arrow .prev {
+	left: 20px;
+	z-index: 50;
+}
+
+.mainVisual .sliderBox .arrow .next {
+	right: 20px;
+	z-index: 50;
+}
+
+.mainVisual .sliderBox .foo ul.round {
+	height: 560px;
+}
+
+#main .caseList {
+	margin: 0 auto 70px;
+	width: 1240px;
+}
+
+#main .caseList li {
+	padding: 0 10px 30px;
+	float: left;
+}
+
+#main .caseList li img {
+	width: 100%;
+}
+
+#main .serviceList {
+	margin: 0 auto 100px;
+	width: 1240px;
+}
+
+#main .serviceList li {
+	margin: 0 10px;
+	width: 290px;
+	float: left;
+	text-align: center;
+}
+
+#main .serviceList li .bg {
+	padding: 10px;
+	background-color: #F2F2F2;
+	border-radius: 10px;
+}
+
+#main .serviceList li .pho {
+	margin-bottom: 20px;
+}
+
+#main .serviceList li .title {
+	margin-bottom: 10px;
+	font-size: 20px;
+}
+
+#main .serviceList li .text {
+	font-size: 14px;
+}
+
+#main .serviceList li img {
+	text-align: center;
+}
+
+#main .step {
+	margin: 0 auto 100px;
+	width: 1240px;
+	position: relative;
+	text-align: center;
+}
+
+#main .step p {
+	position: absolute;
+	left: 160px;
+	bottom: 40px;
+	padding: 0 10px;
+	color: #666;
+	text-decoration: none;
+	border: 1px solid #666;
+	border-radius: 10px;
+}
+
+#main .step a:hover {
+	color: #f2982a;
+}
+
+#main .aboutBox {
+	padding: 50px 0;
+	background: url(../img/index/about_box_bg.jpg) no-repeat center top;
+}
+
+#main .aboutBox .info {
+	margin: 0 auto;
+	width: 1260px;
+}
+
+#main .aboutBox p {
+	margin-bottom: 20px;
+	color: #fff;
+	font-size: 16px;
+	text-indent: 30px;
+}
+
+#main .advantageList {
+	margin: 0 auto 100px;
+	width: 1260px;
+}
+
+#main .advantageList li {
+	padding: 0 15px;
+	width: 390px;
+	float: left;
+}
+
+#main .advantageList li .pho {
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+#main .advantageList li dt {
+	margin-bottom: 20px;
+	position: relative;
+	font-size: 18px;
+	text-align: center;
+}
+
+#main .advantageList li dt:before {
+	width: 26px;  
+    height: 2px;
+	background: #0171C2;
+    position: absolute;  
+    bottom: -10px;  
+    left: 50%;
+	margin-left: -13px;
+  
+    content: ""; 
+} 
+
+#main .advantageList li dd {
+	font-size: 14px;
+}
+
+#main .contact {
+	padding: 40px 0;
+	background: url(../img/common/contact_bg.jpg) no-repeat center top;
+	background-size: 100% auto;
+}
+
+#main .contact .error {
+	color: red;
+	font-style: italic;
+}
+
+#main .contact h2 {
+	color: #fff;
+}
+
+#main .contact .mailForm {
+	margin: 0 auto;
+	width: 1000px;
+}
+
+#main .contact table {
+	margin-bottom: 40px;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+#main .contact th {
+	padding: 12px 10px 12px 0;
+	width: 90px;
+	color: #9b9b9b;
+	font-size: 14px;
+	text-align: left;
+	vertical-align: top;
+}
+
+#main .contact .tips {
+	margin-left: 5px;
+	color: #ff0000;
+}
+
+#main .contact td {
+	padding: 5px 0;
+	color: #9b9b9b;
+	font-size: 14px;
+	text-align: left;
+	vertical-align: top;
+}
+
+#main .contact td input[type="text"] {
+	height: 30px;
+	width: 880px;
+	color: #9b9b9b;
+	border-color: rgba(218, 218, 218, 0.01);
+	background-color: rgba(255, 255, 255, 0.06);
+	box-sizing: border-box;
+}
+
+#main .contact td textarea {
+	height: 100px;
+	width: 880px;
+	color: #9b9b9b;
+	border-color: rgba(218, 218, 218, 0.01);
+	background-color: rgba(255, 255, 255, 0.06);
+	box-sizing: border-box;
+}
+
+#main .contact td li {
+	width: 480px;
+	margin: 10px 20px 10px 0;
+	float: left;
+}
+
+#main .contact td li dt {
+	padding: 7px 0;
+	width: 100px;
+	float: left;
+}
+
+#main .contact td li dd input[type="text"] {
+	width: 380px;
+}
+
+#main .contact .submit {
+	text-align: center;
+}
+
+#main .contact .submit li input[type="submit"] {
+	height: 50px;
+	width: 220px;
+	cursor: pointer;
+	color: #fff;
+	font-size: 14px;
+	border-radius: 5px;
+	background-color: #5AB4FF;
+	border: none;
+}
+
+#main .contact .submit li input[type="submit"]:hover {
+	filter: alpha(opacity=70);
+	opacity: 0.7;
+}
+
+@media all and (min-width: 0) and (max-width: 640px)  {
+	.mainVisual {
+		margin-bottom: 30px;
+	}
+
+	.mainVisual .sliderBox ul.arrow {
+		display: none;
+	}
+	
+	.mainVisual .sliderBox .foo ul.round {
+		height: 90px;
+	}
+
+	#main .serviceList {
+		margin-bottom: 20px;
+		width: auto;
+	}
+
+
+	#main .serviceList li {
+		float: none;
+		margin-bottom: 10px;
+		width: auto;
+	}
+	
+	#main .serviceList li .bg {
+		border-radius: 5px;
+	}
+	
+	#main .serviceList li img {
+		height: 62px;
+	}
+	
+	#main .serviceList li .title {
+		font-size: 16px;
+	}
+	
+	#main .serviceList li .text {
+		font-size: 10px;
+	}
+	
+	#main .step {
+		margin: 0 10px 30px;
+		width: auto;
+	}
+	
+	#main .step img {
+		width: 100%;
+	}
+	
+	#main .step p {
+		margin: 20px auto 0;
+		width: 260px;
+		position: static;
+	}
+	
+	#main .caseList {
+		margin: 0 10px;
+		width: auto;
+	}
+	
+	#main .caseList li {
+		padding: 0 0 20px;
+		width: 49%;
+	}
+	
+	#main .caseList li:nth-child(2n) {
+		float: right;
+	}
+	
+	#main .caseList li img {
+		width: 100%;
+	}
+	
+	#main .caseList li:last-child {
+		display: none;
+	}
+	
+	#main .advantageList {
+		margin-bottom: 10px;
+		width: auto;
+	}
+	
+	#main .advantageList li {
+		padding: 0 10px 20px;
+		width: auto;
+		float: none;
+	}
+	
+	#main .advantageList li dt {
+		font-size: 14px;
+	}
+	
+	#main .advantageList li dd {
+		font-size: 10px;
+	}
+	
+	#main .aboutBox {
+		padding: 30px 10px;
+		background-size: cover;
+	}
+	
+	#main .aboutBox .info {
+		width: auto;
+	}
+	
+	#main .aboutBox p {
+		font-size: 12px;
+	}
+	
+	#main .contact {
+		padding: 20px 10px;
+		background-size: cover
+	}
+	
+	#main .contact .mailForm {
+		width: auto;
+	}
+	
+	#main .contact table {
+		margin-bottom: 20px;
+	}
+	
+	#main .contact th {
+		float: left;
+		width: 100%;
+		box-sizing: border-box;
+	}
+	
+	#main .contact td {
+		float: left;
+		width: 100%;
+		box-sizing: border-box;
+	}
+	
+	#main .contact td li {
+		float: none;
+		margin-right: 0;
+		width: auto;
+	}
+	
+	#main .contact td li:first-child {
+		margin-top: 0;
+	}
+	
+	#main .contact td li:last-child {
+		margin-bottom: 0;
+	}
+	
+	#main .contact td li dt {
+		float: none;
+	}
+	
+	#main .contact td input[type="text"],
+	#main .contact td li dd input[type="text"] {
+		width: 100%;
+	}
+	
+	#main .contact td textarea {
+		width: 100%;
+	}
+
+}
