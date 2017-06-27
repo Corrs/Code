@@ -19,16 +19,24 @@ axios.defaults.withCredentials=true;
 // 路由全局钩子
 router.beforeEach((to, from, next) => {
   // 请求后台，获得是否登录信息 未登录跳转到登录页面
-  axios.post(global.server.url + "/login/isLogin").then(function(response) {
+  axios.post(jr.server.url + "/login/isLogin").then(function(response) {
     if(response.data.isLogin || to.fullPath == "/login") {
       next();
     } else {
+      alert("用户未登录，将跳转到登录页面进行用户登录！");
       next({
         path: '/login'
       });
     }
   }).catch(function(error) {
-
+    if(to.fullPath != "/login") {
+      alert("服务器访问失败！");
+      next({
+        path: '/login'
+      });
+    } else {
+      next();
+    }
   });
 });
 
