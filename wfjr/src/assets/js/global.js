@@ -4,7 +4,7 @@ class Global {
     constructor(config) {
         this.server = config.server; 
     }
-    
+    // 验证浏览器
     validateBrowser() {
 
         let ua = navigator.userAgent;     
@@ -31,7 +31,7 @@ class Global {
 	      break;                 
 	    }
     }
-
+    //获得cookie
     getCookie(c_name) {
         if (document.cookie.length > 0) {
             let c_start = document.cookie.indexOf(c_name + "=")
@@ -45,13 +45,19 @@ class Global {
         }
         return ""
     }
-
+    // 设置cookie
     setCookie(c_name, value, expiredays) {
         let exdate = new Date()
         exdate.setDate(exdate.getDate() + expiredays)
         document.cookie = c_name + "=" + escape(value)
                 + ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString())
     }
+    // 返回可见区域高度
+    getClientHeight() {
+      return $(window).height();
+    }
+
+    
 }
 
 window.jr = new Global({
@@ -60,7 +66,7 @@ window.jr = new Global({
     }
 });
 //debugger;
-export default window.jr;
+export default Global;
 
 
 

@@ -7,7 +7,7 @@ small, strike, strong, sub, sup, tt, var,
 b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td {
+table, caption, tbody, tfoot, thead, tr, th, td, #app {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -80,4 +80,8 @@ body {
 	line-height: 1.5;
 	background-color: #F7F7F7;
 	-webkit-text-size-adjust: none;
+}
+
+html,body,#app{
+	height:100%;
 }

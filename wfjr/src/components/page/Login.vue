@@ -1,10 +1,10 @@
 <template>
-  <div >
+  <div>
     <el-row>
       <el-col>
         <div class="login_wrapper">
           <div class="animate form login_form">
-            <section class="login_content">
+            <section class="login_content" @keyup.enter="submitForm(isLoginPage?'loginForm':'registerForm')">
               <transition name="slide-fade" mode="out-in">
                 <div v-show="isLoginPage">
                   <el-form id="loginForm" :action="loginForm.action" :model="loginForm" ref="loginForm" :rules="loginRules" :show-message="true">
@@ -131,7 +131,7 @@
                           <label for="validCode">验证码</label>
                         </el-col>
                         <el-col :xs="24" :sm="24" :md="18" :lg="18">
-                          <el-input class="serverValidCode" type="text" auto-complete="off" name="validCode" v-model.trim="registerForm.validCode" placeholder="请输入验证码"></el-input>
+                          <el-input type="text" auto-complete="off" name="validCode" v-model.trim="registerForm.validCode" placeholder="请输入验证码"></el-input>
                         </el-col>
                       </el-row>
                     </el-form-item>
@@ -589,6 +589,10 @@ div.el-form-item__error {
 
 .el-checkbox__label {
   font-size: 12px;
+}
+
+.el-button {
+  margin-left: 0 !important;
 }
 
 .separator {
