@@ -1,11 +1,11 @@
 <template>
   <div>
     <el-row>
-      <el-col :xs="0" :sm="0" :md="3" :lg="3">
+      <el-col v-if="toggle" :xs="0" :sm="0" :md="3" :lg="3">
         <LeftNav></LeftNav> 
       </el-col>
-      <el-col :xs="24" :sm="24" :md="21" :lg="21">
-        <RHeader></RHeader>
+      <el-col :xs="24" :sm="24" :md="md" :lg="lg">
+        <RHeader @changeNav="changeNav"></RHeader>
         <div>
           <router-view></router-view>
         </div>
@@ -20,7 +20,9 @@ import RHeader from '@/components/common/RHeader.vue'
 export default {
   data () {
       return {
-          msg: "首页，登录成功！"
+          toggle: true,
+          md: 21,
+          lg: 21
       }
   },
   components: {
@@ -28,13 +30,17 @@ export default {
     RHeader
   },
   created () {
-    this.getPageHeight();
+    
   },
   mounted () {
     
   },
   methods: {
-    
+    changeNav() {
+      this.toggle = !this.toggle;
+      this.md = this.toggle ? 21 : 24;
+      this.lg = this.md;
+    }
   }
 }
 </script>

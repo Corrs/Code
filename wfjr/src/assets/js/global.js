@@ -54,10 +54,13 @@ class Global {
     }
     // 返回可见区域高度
     getClientHeight() {
-      return $(window).height();
+        return document.body.clientHeight;
+    }
+    // 返回可见区域高度
+    getClientWidth() {
+        return document.body.clientWidth;
     }
 
-    
 }
 
 window.jr = new Global({

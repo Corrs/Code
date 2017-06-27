@@ -8,13 +8,26 @@
 import router from '@/router'
 
 export default {
-  
+  data () {
+    return {
+      
+    }
+  },
+  created () {
+    
+  },
+  mounted () {
+    $(".nav").height(jr.getClientHeight());
+  }
 }
 </script>
 
-<style>
+<style scoped>
 .nav {
-    background-color: rebeccapurple !important;
+    background-color: #2A3F54 !important;
+    color: #ECF0F1;
+    padding: 0;
+    margin: 0;
 }
 </style>
 
