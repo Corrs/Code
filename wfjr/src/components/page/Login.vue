@@ -391,12 +391,10 @@ export default {
       $form.validate((valid) => {
         if (valid) {
           _this.$axios.post($form.model.action,$.param($form.model)).then(function(response){
-            console.log(router);
             if(response.data.success) {
-              debugger;
-              if(jr.getCookie("username") != "" ||  !_this.checkedCookie) {
+              if(!_this.checkedCookie) {
                 jr.setCookie("username", $form.model.username, 0);
-              } else {
+              } else if(jr.getCookie("username") != $form.model.username) {
                 jr.setCookie("username", $form.model.username, 10);
               }
               router.push("/");
