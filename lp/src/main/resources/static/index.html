@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="format-detection" content="telephone=no">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<title></title>
+<link rel="stylesheet" type="text/css" href="css/common/layout.css">
+<link rel="stylesheet" type="text/css" href="css/common/general.css">
+<!--主要样式-->
+<link rel="stylesheet" type="text/css" href="css/jquery.smarticker.css">
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="js/smarticker.js"></script>
+<script type="text/javascript" src="js/jquery.form.min.js"></script>
+<script type="text/javascript" src="js/jquery.page-scroller.js"></script>
+<script type="text/javascript" src="js/jquery.carouFredSel-6.1.0.js"></script>
+<script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
+<script type="text/javascript">
+if(((navigator.userAgent.indexOf('iPhone') > 0) || (navigator.userAgent.indexOf('Android') > 0) && (navigator.userAgent.indexOf('Mobile') > 0) && (navigator.userAgent.indexOf('SC-01C') == -1))){
+document.write('<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">');
+}
+$(function(){
+	var tip = "留言提交成功，我们会及时处理！";
+	initContent();
+	initCatalog();
+	initConfig();
+	initSubmit();
+	initOnScroll();
+	initContact();
+	goTop();
+	
+	
+	function initContact() {
+		$.getJSON("./contact/api/query?order=type", function(result) {
+			console.log(result);
+			if(result && result.success) {
+				var $sns = $(".sns");
+				for(var i=0; i<result.rows.length; i++) {
+					var row = result.rows[i];
+					switch(row.type) {
+					case 1:
+						$sns.append("<li title='在线QQ'><a href='tencent://message/?uin="+row.contact+"&Site=Sambow&Menu=yes'><img src='./img/common/QQ.png' alt='打开QQ'></a></li>");
+						break;
+					case 2:
+						$sns.append("<li title='拨打热线'><a href='wtai://wp//mc;"+row.contact+"'><img src='./img/common/tel.png' alt='拨打电话'></a></li>");
+						break;
+					case 3:
+						$sns.append("<li title='在线微信'><a href='weixin://contacts/profile/"+row.contact+"'><img width='53px' height='53px' src='./img/common/wechat.jpg' alt='拨打电话'></a></li>");
+						break;
+					}
+				}
+			}
+		});
+	}
+	
+	function initOnScroll() {
+		$(document).scroll(function(e) {
+			document.body.scrollTop > 0 ? $("#goTop").css("display", "block") : $("#goTop").css("display", "none");  
+		});
+	}
+	
+	$("#goTop").on("click", function() {
+		goTop();
+	});
+	function goTop() {
+		$('html, body').animate({scrollTop: 0}, 400);
+	}
+	
+	function initContent() {
+		$.get("./content/api/query?orderBy=catalog,createdate", function($data, status, jqXHR) {
+			try {
+				var result = $.parseJSON($data);
+				if(result.success) {
+					var rows = result.rows,
+						$gHeader = $("#gHeader"),
+						$carousel = $(".mainVisual .foo ul"),
+						$sub = $("div.try");
+					
+					for(var i=0; i<rows.length; i++) {
+						var img = "<img src='./api/static"+rows[i].image.substring(rows[i].image.lastIndexOf("/"))+"' alt='"+rows[i].remark+"'>";
+						switch(rows[i].catalog) {
+						case "banner":
+							$gHeader.append("<div class='hBox'><h1>"+img+"</h1></div>");
+							break;
+						case "carousel": 
+							$carousel.append("<li>"+img+"</li>");
+							break;
+						case "sub": 
+							$sub.append(img);
+							break;
+						case "002": 
+							$("#"+rows[i].catalog).append("<div class='textImg'>" + img + "</div>");
+							break;
+						case "003": 
+						case "004":
+						case "005": 
+							$("#"+rows[i].catalog).append(img);
+							break;
+						}
+					}
+					initCarousel();
+					
+				}
+			} catch(e) {
+				console.log("初始化content失败", e);
+			}
+			
+		});
+	}
+	
+	function initCatalog() {
+		$.get("./sys/catalog/api/query?orderBy=code", function($data, status, jqXHR) {
+			try {
+				var result = $.parseJSON($data);
+				if(result.success) {
+					var rows = result.rows,
+						catalogUl = $("#gNavi ul");
+					catalogUl.html("");
+					
+					for(var i=0; i<rows.length; i++) {
+						catalogUl.append("<li><a class='Anchor' href=#"+(rows[i].code=="001"?"gHeader":rows[i].code)+">"+rows[i].name+"</a></li>");
+					}
+					$("#gNavi .Anchor").on("click", function(e) {
+						e.preventDefault();
+						$('html, body').animate({scrollTop: $(this.hash).offset().top}, 400);
+					});
+				}
+			} catch(e) {
+				console.log("初始化catalog失败",e);
+			}
+			
+		});
+	}
+	
+	
+	function initConfig() {
+		$.get("./sys/content/api/query",{inuse:1}, function($data, status, jqXHR) {
+			try {
+				var result = $.parseJSON($data);
+				if(result.success) {
+					var rows = result.rows,
+						pns = $.parseJSON(result.queryParam.prop4);
+					if(rows.length > 0) {
+						var row = rows[0],
+							$gFooter = $("#gFooter"),
+							$body = $("body"),
+							$gHeader = $("#gHeader"),
+							$offerul = $("#offer ul"),
+							$buyul = $("#buy ul");
+						tip = row.prop2?row.prop2:tip;
+						$gFooter.css("backgroundColor", row.footerbgcolor);
+						$body.css("backgroundColor", row.bgcolor);
+						$gHeader.css("backgroundColor", row.bgcolor);
+						$gFooter.children(":first-child").html(row.footercontent);
+						$("head title").text(row.title);
+						if(row.offer) {
+							for(var i=0; i<10; i++) {
+								$offerul.append("<li>" + row.offer.replace(/{手机号}/g, pns[i]) + "</li>");
+							}
+						} else {
+							$("#offer").css("display", "none");
+						}
+						
+						if(row.buy) {
+							for(var i=10; i<pns.length; i++) {
+								$buyul.append("<li>" + row.buy.replace(/{手机号}/g, pns[i]) + "</li>");
+							}
+						} else {
+							$("#buy").css("display", "none");
+						}
+						initScroll();
+					}
+				}
+			} catch(e) {
+				console.log("初始化catalog失败",e);
+			}
+			
+		});
+	}
+	
+	
+	function initCarousel() {
+		$(".mainVisual .foo ul").carouFredSel({
+			responsive: true,
+			width: '100%',
+			auto: 3000,
+			items: {
+				visible: {
+					min: 1,
+					max: 1	
+				},
+				width: 1020,	//宽高比例保持不变
+				height: (31000/1020)+'%'
+			},
+			scroll: {
+				items: 1
+			}
+		});
+	}
+	
+	
+	function initSubmit() {
+		
+		var formArr = [];
+		$.getJSON("./form/api/query", function(result, status){
+			if(result.success) {
+				formArr = result.rows;
+				$(".mailForm tbody").html("");
+				for(var i=0; i<result.rows.length; i++) {
+					var row = result.rows[i];
+					var $tr = "<tr><th>" + row.label + "</th><td>";
+					if(row.fieldtype == 4) {
+						$tr = $tr + "<textarea fieldtype='"+row.fieldtype+"' name='"+row.fieldname+"' cols='5' rows='5' placeholder='"+row.placeholder+"'></textarea>";
+					} else {
+						$tr = $tr + "<input fieldtype='"+row.fieldtype+"' type='text' name='"+row.fieldname+"' value='' placeholder='"+row.placeholder+"'>";
+					}
+					$(".mailForm tbody").append($tr);
+				}
+			}
+		});
+		
+		$("#submit").on("click", function(e) {
+			e.preventDefault();
+			 var $form = $(".mailForm"),
+			 	 $errContainer = $form.find("#error"),
+			 	 flag = false;/*,
+				inputs = $form.find("input"),
+				text = $form.find("textarea")[0];
+			 */
+			 $errContainer.html("");
+			 
+			 for(var i=0; i<formArr.length; i++) {
+				 var fieldName = formArr[i].fieldname,
+				 	 fieldType = formArr[i].fieldtype,
+				 	 label = formArr[i].label;
+				 
+				 $form.find("[name='"+fieldName+"']").val($.trim($form.find("[name='"+fieldName+"']").val()));
+				 switch(fieldType) {
+				 case 1:
+					 flag = validStr($form.find("[name='"+fieldName+"']").val(), label);
+					 break;
+				 case 2:
+					 flag = validNum($form.find("[name='"+fieldName+"']").val(), label);
+					 break;
+				 case 4:
+					 flag = validText($form.find("[name='"+fieldName+"']").val(), label);
+					 break;
+				 }
+			 }
+			 
+			 function validStr(str, label) {
+				 if(str.length>100) {
+					 $errContainer.append("<li>"+label+"不能超过100个字符。</li>");
+					return false;
+				 } 
+				 
+				 return true;
+			 }
+			 
+			 function validText(str, label) {
+				 if(str.length>500) {
+					 $errContainer.append("<li>"+label+"不能超过100个字符。</li>");
+					return false;
+				 } 
+				 
+				 return true;
+			 }
+			 
+			 function validNum(num, label) {
+				 if(!(/^\d{0,100}$/.test(num))) {
+					 $errContainer.append("<li>请输入正确的"+label+"，必须为不超过100位的数字。</li>");
+					 return false;
+				 }
+				 
+				 return true;
+			 }
+			/* $form.find("[name='name']").val($.trim($form.find("[name='name']").val()));
+			$form.find("[name='age']").val($.trim($form.find("[name='age']").val()));
+			$form.find("[name='phone']").val($.trim($form.find("[name='phone']").val()));
+			$form.find("[name='wechat']").val($.trim($form.find("[name='wechat']").val()));
+			$form.find("[name='qq']").val($.trim($form.find("[name='qq']").val()));
+			$form.find("[name='address']").val($.trim($form.find("[name='address']").val()));
+			$form.find("[name='msg']").val($.trim($form.find("[name='msg']").val())); 
+			
+			
+			if($form.find("[name='name']").val().length>20) {
+				$errContainer.append("<li>姓名不能超过20个字符。</li>");
+				flag = false;
+			} 
+			
+			if(!(/^\d{0,2}$/.test($form.find("[name='age']").val()))) {
+				$errContainer.append("<li>请输入正确的年龄，必须为不超过2位的数字。</li>");
+				flag = false;
+			} 
+			
+			if(!(/^\d{0,11}$/.test($form.find("[name='phone']").val()))) {
+				$errContainer.append("<li>请输入正确的手机，必须为不超过11位的数字。");
+				flag = false;
+			} 
+			
+			if(!(/^\d{0,10}$/.test($form.find("[name='qq']").val()))) {
+				$errContainer.append("<li>请输入正确的qq，必须为不超过10位的数字。</li>");
+				flag = false;
+			} 
+			
+			if($form.find("[name='address']").val().length > 100) {
+				$errContainer.append("<li>地址不能超过100字符。</li>");
+				flag = false;
+			} 
+			
+			if($form.find("[name='msg']").val().length > 500) {
+				$errContainer.append("<li>留言不能超过500字符。</li>");
+				flag = false;
+			}  */
+			
+			flag ? $errContainer.css("display", "none") : $errContainer.css("display", "block")
+			
+			
+			if (flag) {
+				submitForm($form);
+			}
+		});
+		
+		function submitForm($form) {
+			$form.ajaxSubmit({
+				url: "./msg/api/saveMap",
+    			success: function(responseText, statusText, xhr, $form) { 
+    				console.log(responseText, statusText, xhr, $form);
+   					var result = responseText ? $.parseJSON(responseText) : "";
+ 					alert(tip);
+ 					$form.resetForm();
+    			},
+    			error: function(responseText, statusText, xhr, $form) {
+    				console.log(responseText, statusText, xhr, $form);
+    				alert(tip);
+    				$form.resetForm();
+    			}
+    		});
+		}
+	}
+	
+	function initScroll() {
+		try {
+			$("#offer").smarticker({
+				theme:2,
+				title:"",
+				speed:2e3,
+				pausetime:4e3
+			});
+			
+			$("#buy").smarticker({
+				theme:2,
+				title:"",
+				speed:2e3,
+				pausetime:4e3
+			});
+		} catch(e) {
+			console.log("文字滚动插件初始化错误", e);
+		}
+	}
+	 
+});
+</script>
+<style type="text/css">
+	.tickertitle {
+		display: none !important;
+	}
+	a {
+		cursor: pointer;
+	}
+	#error {
+		display: none; 
+		color: red;
+		background-color: white;
+		font-size: 14px;
+		font-weight: bold;
+		margin-bottom: 5px;
+	}
+	.sns li {
+		margin-bottom: 2px;
+	}
+</style>
+<!--[if lt IE 9]>
+<script src="js/html5.js"></script>
+<![endif]-->
+</head>
+<body>
+<div id="container">
+	<header id="gHeader">
+		<!-- <div class="hBox">
+			<h1><img src="img/common/header_img.jpg" alt=""></h1>
+		</div> -->
+	</header>
+	<nav id="gNavi">
+		<ul class="clearfix">
+			<!-- <li><a href="#gHeader">首页</a></li>
+			<li><a href="#a01">产品介绍</a></li>
+			<li><a href="#a02">产品功效</a></li>
+			<li><a href="#a03">产品优势</a></li>
+			<li><a href="#a04">用户案例</a></li> -->
+		</ul>
+	</nav>
+	<div class="mainVisual">
+		<div class="foo">
+			<ul>
+				<!-- <li><img src="img/index/main_visual_img01.jpg" alt=""></li>
+				<li><img src="img/index/main_visual_img02.jpg" alt=""></li>
+				<li><img src="img/index/main_visual_img03.jpg" alt=""></li> -->
+			</ul>
+		</div>
+	</div>
+	<section id="main">
+		<div class="try"><!-- <img src="img/index/imgtext01.jpg" alt=""><img src="img/index/imgtext01.jpg" alt=""> --></div>
+		<form method="post" class="mailForm">
+			<table>
+				<tbody>
+					<!-- <tr>
+						<th>姓名</th>
+						<td><input type="text" id="" name="name" value=""></td>
+					</tr>
+					<tr>
+						<th>年龄</th>
+						<td><input type="text" id="" name="age" value=""></td>
+					</tr>
+					<tr>
+						<th>电话</th>
+						<td><input type="text" id="" name="phone" value=""></td>
+					</tr>
+					<tr>
+						<th>微信</th>
+						<td><input type="text" id="" name="wechat" value=""></td>
+					</tr>
+					<tr>
+						<th>QQ</th>
+						<td><input type="text" id="" name="qq" value=""></td>
+					</tr>
+					<tr>
+						<th>地址</th>
+						<td><input type="text" id="" name="address" value=""></td>
+					</tr>
+					<tr>
+						<th>留言</th>
+						<td><textarea id="" name="msg" cols="5" rows="5"></textarea></td>
+					</tr> -->
+				</tbody>
+			</table>
+			<ul id="error"></ul>
+			<ul class="submit">
+				<li>
+					<input type="submit" alt="提交" id="submit" name="__send__" value="提交">
+				</li>
+			</ul>
+		</form>
+		<div class="experience" id="offer">
+			<ul style="overflow: hidden; height: 100%;">
+				<!-- <li>[恭喜用户]133****4096获取价值198元龍陽宫免费体验资格</li>
+				<li>[恭喜用户]133****4096获取价值198元龍陽宫免费体验资格</li>
+				<li>[恭喜用户]133****4096获取价值198元龍陽宫免费体验资格</li>
+				<li>[恭喜用户]133****4096获取价值198元龍陽宫免费体验资格</li>
+				<li>[恭喜用户]133****4096获取价值198元龍陽宫免费体验资格</li>
+				<li>[恭喜用户]133****4096获取价值198元龍陽宫免费体验资格</li>
+				<li>[恭喜用户]133****4096获取价值198元龍陽宫免费体验资格</li>
+				<li>[恭喜用户]133****4096获取价值198元龍陽宫免费体验资格</li>
+				<li>[恭喜用户]133****4096获取价值198元龍陽宫免费体验资格</li>
+				<li>[恭喜用户]133****4096获取价值198元龍陽宫免费体验资格</li>
+				<li>[恭喜用户]133****4096获取价值198元龍陽宫免费体验资格</li>
+				<li>[恭喜用户]133****4096获取价值198元龍陽宫免费体验资格</li> -->
+			</ul>
+		</div>
+		<div class="product" id="002">
+			<!-- <div class="textImg"><img src="img/index/imgtext02.jpg" alt=""></div>
+			<div class="textImg"><img src="img/index/imgtext03.jpg" alt=""></div> -->
+		</div>
+		<div class="effect" id="003"><!-- <img src="img/index/imgtext04.jpg" alt=""> --></div>
+		<div class="advantage" id="004"><!--  <img src="img/index/imgtext05.jpg" alt=""><img src="img/index/imgtext06.jpg" alt=""><img src="img/index/imgtext07.jpg" alt=""><img src="img/index/imgtext08.jpg" alt=""><img src="img/index/imgtext09.jpg" alt=""> --></div>
+		<div class="case" id="005"><!-- <img src="img/index/imgtext10.jpg" alt=""> --></div>
+		<div class="experience" id="buy">
+			<ul style="overflow: hidden; height: 100%;">
+				<!-- <li>[恭喜用户]133****4096在9分钟前订购了（两件99元）</li>
+				<li>[恭喜用户]133****4096在9分钟前订购了（两件99元）</li>
+				<li>[恭喜用户]133****4096在9分钟前订购了（两件99元）</li>
+				<li>[恭喜用户]133****4096在9分钟前订购了（两件99元）</li> -->
+			</ul>
+		</div>
+		<ul class="sns">
+			<li id="goTop" style="display: none;"><a title="返回顶部"><img src="./img/common/goTop.png" alt="返回顶部"></a></li>
+		</ul>
+	</section>
+	<footer id="gFooter">
+		<div class="fBox">
+			<!-- <ul class="fNavi">
+				<li><a href="#gHeader">首页</a></li>
+				<li><a href="#a01">产品介绍</a></li>
+				<li><a href="#a02">产品功效</a></li>
+				<li><a href="#a03">产品优势</a></li>
+				<li><a href="#a04">用户案例</a></li>
+			</ul>
+			<p class="copyright">版权所有COPYRIGHT &copy; 2006-2016ALL RIGHTS RESERVED 上海爱微投资管理有限公司 地址：上海市松江区洞泾镇茂盛路202弄1号1045室</p>
+			<p class="text">正品保证！如果你在本站买的产品属仿冒产品，我们将十倍偿还！！！</p>
+			<p class="text">24小时订购热线：400-081-8722 手机号13522438303</p> -->
+		</div>
+	</footer>
+</div>
+</body>
+</html>

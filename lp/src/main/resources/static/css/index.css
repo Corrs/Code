@@ -1,0 +1,126 @@
+@charset "utf-8";
+/*------------------------------------------------------------
+	index
+------------------------------------------------------------*/
+.mainVisual {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+}
+
+.mainVisual li {
+	float: left;
+	text-align: center;
+}
+
+.mainVisual li img {
+	width: 100%;
+}
+
+.mainVisual .foo {
+	overflow: hidden;
+}
+
+#main .try {
+	margin-bottom: 30px;
+}
+
+#main .mailForm {
+	margin: 0 auto 50px;
+	width: 500px;
+}
+
+#main .mailForm table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+#main .mailForm th {
+	padding: 15px 10px 10px;
+	font-size: 14px;
+	width: 70px;
+	text-align: left;
+	vertical-align: top;
+}
+
+#main .mailForm td {
+	padding: 10px 0;
+	font-size: 14px;
+	text-align: left;
+	vertical-align: top;
+}
+
+#main .mailForm td input[type="text"] {
+	height: 30px;
+	width: 100%;
+	border-color: rgba(218, 218, 218, 0.01);
+	background-color: rgba(255, 255, 255, 0.06);
+	box-sizing: border-box;
+}
+
+#main .mailForm td textarea {
+	height: 300px;
+	width: 100%;
+	resize: none;
+	border-color: rgba(218, 218, 218, 0.01);
+	background-color: rgba(255, 255, 255, 0.06);
+	box-sizing: border-box;
+}
+
+#main .mailForm .submit {
+	text-align: center;
+}
+
+#main .mailForm .submit input[type="submit"] {
+	height: 30px;
+	width: 100px;
+	cursor: pointer;
+	color: #fff;
+	font-size: 16px;
+	font-weight: bold;
+	text-shadow: 1px 1px 1px #333;
+	background-color: #FF5600;
+	border: none;
+	border-radius: 5px;
+}
+
+#main .experience {
+	margin-bottom: 50px;
+	padding: 10px;
+	background-color: #EFEFEF;
+	border: 1px solid #DDD;
+}
+
+#main .experience li {
+	color: #000;
+	font-size: 14px;
+}
+
+@media all and (min-width: 0) and (max-width: 767px)  {
+	.mainVisual li img {
+		width: 100%;
+	}
+	
+	#main .try img {
+		width: 100%;
+	}
+	
+	#main .mailForm {
+		width: auto;
+	}
+	
+	#main .mailForm th {
+		width: 40px;
+	}
+	
+	#main .mailForm td {
+		padding-right: 10px;
+	}
+	
+	#main .product img,
+	#main .effect img,
+	#main .advantage img,
+	#main .case img {
+		width: 100%;
+	}
+}

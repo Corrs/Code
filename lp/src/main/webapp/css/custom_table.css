@@ -1,0 +1,34 @@
+@CHARSET "UTF-8";
+
+.fixed-table-container {
+	position: relative;
+	clear: both;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+}
+
+.bootstrap-table {
+	height: 85% !important;
+}
+
+.btn-default {
+	color: #333;
+	text-decoration: none;
+	height: 34px !important;
+}
+
+
+.fixed-table-container .bs-checkbox {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table-fixed {
+	table-layout: fixed;
+}
+
+td {
+	height: 40px;
+}

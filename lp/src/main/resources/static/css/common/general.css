@@ -1,0 +1,85 @@
+@charset "utf-8";
+/*------------------------------------------------------------
+	格式化
+------------------------------------------------------------*/
+/* 文本的位置 */
+.taLeft { text-align: left !important; }
+.taCenter { text-align: center !important; }
+.taRight { text-align: right !important; }
+
+/* 字体大小（加） */
+.fsP1 { font-size: 1.08em !important; }
+.fsP2 { font-size: 1.16em !important; }
+.fsP3 { font-size: 1.24em !important; }
+.fsP4 { font-size: 1.32em !important; }
+.fsP5 { font-size: 1.4em !important; }
+
+/* 字体大小（减） */
+.fsM1 { font-size: 0.92em !important; }
+.fsM2 { font-size: 0.84em !important; }
+.fsM3 { font-size: 0.76em !important; }
+.fsM4 { font-size: 0.68em !important; }
+.fsM5 { font-size: 0.6em !important; }
+
+/* 字体的粗细 */
+.fwNormal { font-weight: normal !important; }
+.fwBold { font-weight: bold !important; }
+
+/*------------------------------------------------------------
+	微调的类
+------------------------------------------------------------*/
+.mt0 { margin-top: 0 !important; }
+.mb0 { margin-bottom: 0 !important; }
+.mb5 { margin-bottom: 5px !important; }
+.mb10 { margin-bottom: 10px !important; }
+.t_center{ text-align:center !important;}
+
+/*------------------------------------------------------------
+	通用风格
+------------------------------------------------------------*/
+	* html .clearfix {
+		zoom: 1;
+	}
+
+	*+html .clearfix {
+		zoom: 1;
+	}
+
+.clearfix:after {
+	height: 0;
+	visibility: hidden;
+	content: ".";
+	display: block;
+	clear: both;
+}
+
+/*------------------------------------------------------------
+	链接输入时的类
+------------------------------------------------------------*/
+a.tapCtrl, input.tapCtrl,
+.tapCtrl a, .tapCtrl input {
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.tap {
+
+}
+
+/*------------------------------------------------------------
+	sns
+------------------------------------------------------------*/
+.sns {
+	position: fixed;
+	right: 0;
+	top: 180px;
+}
+
+@media all and (min-width: 0) and (max-width: 767px)  {
+/*------------------------------------------------------------
+	sns
+------------------------------------------------------------*/
+	.sns li img {
+		width: 35px;
+	}
+
+}

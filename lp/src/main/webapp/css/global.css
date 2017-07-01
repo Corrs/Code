@@ -1,0 +1,96 @@
+@CHARSET "UTF-8";
+html, boby {
+	overflow: hidden;
+}
+
+textarea {
+	resize: none;
+}
+
+.jrwl_custom_content {
+	overflow: auto;
+	height: 90%;
+}
+
+.jrwl_custom_listcontent {
+	overflow: hidden;
+	height: 94%;
+}
+
+.jrwl_custom_panel {
+	height: 88%;
+}
+
+.jrwl_custom_listpanel {
+	height: 100%;
+}
+
+
+.jrwl_custom_treecontent {
+	overflow: auto;
+	height: 100%;
+}
+
+
+th {
+	text-align: center;
+}
+
+/* 单元格连续纯字母数字强制换行显示 */
+.wordwrap{
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden;
+}
+/* 超长文字单元格省略号显示 */
+.ellipsis{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+}
+
+.panel_toolbox>li.right {
+    float: right;
+    cursor: pointer;
+}
+
+
+#loading {
+	width: 100%;
+	height: 100%;
+	z-index: 999999;
+	background-color:#eee;
+    position:absolute; /* IE6、7、8只能设置position:static(默认属性) ，否则会导致子元素继承Alpha值 */
+	filter:alpha(opacity=60);  
+    -moz-opacity:0.6;  
+    -khtml-opacity: 0.6;  
+    opacity: 0.6;
+    *zoom:1;
+    display: none;
+}
+
+#loading>i {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	color: black;
+}
+
+ul#defaultImg > li, ul#customImg > li {
+	position: relative;
+	width: 50px;
+	height: 50px;
+	overflow: hidden;
+    margin: 10px 10px 0 0;
+    cursor: pointer;
+}
+
+ul#defaultImg > li.selected b, ul#customImg > li.selected b {
+	position: absolute;
+    top: 0;
+    left: 2px;
+    width: 50px;
+    height: 50px;
+    background: url(../static/img/defaultImgs/face-selt.png) no-repeat;
+}

@@ -1,0 +1,238 @@
+@charset "utf-8";
+/*------------------------------------------------------------
+	默认风格
+------------------------------------------------------------*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+
+	font-size: 1em;
+}
+
+body {
+	font-size: 62.5%;
+}
+
+body,
+table,
+input, textarea, select, option {
+	font-family: arial;
+}
+
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary {
+	display: block;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+:focus {
+	outline: 0;
+}
+
+ins {
+	text-decoration: none;
+}
+
+del {
+	text-decoration: line-through;
+}
+
+img {
+	vertical-align: top;
+}
+
+a,
+a:link {
+	color: #fff;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #fff;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #fff;
+	text-decoration: underline;
+}
+
+a:active {
+	color: #fff;
+	text-decoration: underline;
+}
+
+/*------------------------------------------------------------
+	布局
+------------------------------------------------------------*/
+body {
+	color: #fff;
+	font-size: 12px;
+	line-height: 1.5;
+	background-color: #0C341C;
+	-webkit-text-size-adjust: none;
+}
+
+#container {
+	text-align: left;
+}
+
+#main {
+	margin: 0 auto;
+	width: 1000px;
+}
+
+/*------------------------------------------------------------
+	头
+------------------------------------------------------------*/
+#gHeader {
+	background-color: #214F11;
+}
+
+#gHeader .hBox {
+	margin: 0 auto;
+	width: 1000px;
+}
+
+/*------------------------------------------------------------
+	导航
+------------------------------------------------------------*/
+#gNavi {
+	padding: 6px 0;
+	background-color: #0E2C09;
+}
+
+#gNavi ul {
+	margin: 0 auto;
+	width: 954px;
+}
+
+#gNavi ul li {
+	margin-right: 14px;
+	display: inline;
+	font-size: 16px;
+	border-right: 1px solid #fff;
+}
+
+#gNavi ul li a {
+	margin-right: 14px;
+}
+
+/*------------------------------------------------------------
+	脚
+------------------------------------------------------------*/
+#gFooter {
+	padding: 45px 0;
+	background-color: #214F11;
+}
+
+#gFooter .fBox {
+	margin: 0 auto;
+	width: 1000px;
+}
+
+#gFooter .fNavi {
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+#gFooter .fNavi li {
+	margin-right: 12px;
+	display: inline;
+	font-size: 14px;
+	border-right: 1px solid #fff;
+}
+
+#gFooter .fNavi li a {
+	margin-right: 14px;
+}
+
+#gFooter .copyright,
+#gFooter .text {
+	margin-bottom: 10px;
+	font-size: 14px;
+	text-align: center;
+}
+
+@media all and (min-width: 0px) and (max-width: 767px) {
+	a:hover {
+		text-decoration: none;
+	}
+	
+	#main {
+		margin: 0 auto;
+		width: auto;
+	}
+
+/*------------------------------------------------------------
+	头
+------------------------------------------------------------*/
+	#gHeader .hBox {
+		width: auto;
+	}
+	
+	#gHeader .hBox h1 img {
+		width: 100%;
+	}
+
+/*------------------------------------------------------------
+	导航
+------------------------------------------------------------*/
+	#gNavi ul {
+		width: auto;
+		text-align: center;
+	}
+	
+	#gNavi ul li {
+		margin-right: 7px;
+		font-size: 12px;
+	}
+	
+	#gNavi ul li a {
+		margin-right: 7px;
+	}
+
+/*------------------------------------------------------------
+	脚
+------------------------------------------------------------*/
+	#gFooter {
+		padding: 20px 0 10px;
+	}
+
+	#gFooter .fBox {
+		width: auto;
+	}
+	
+	#gFooter .fNavi li {
+		margin-right: 7px;
+		font-size: 12px;
+	}
+	
+	#gFooter .fNavi li a {
+		margin-right: 7px;
+	}
+	
+	#gFooter .copyright,
+	#gFooter .text {
+		margin: 10px;
+		font-size: 12px;
+	}
+
+}
